@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Index</title>
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css" integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn" crossorigin="anonymous">
+	<script src="https://kit.fontawesome.com/c153436894.js" crossorigin="anonymous"></script>
+	<style type="text/css">
+		.child.dragging{
+			opacity: .5;
+		}
+		.dis_4{
+			font-size: 100px;
+		}
+		@media screen and (min-device-width: 320px) and (max-device-width: 768px){
+			.fh5{
+				font-size: 40px !important;
+			}
+			.text-font{
+				font-size: 25px;
+			}
+		}
+	</style>
+</head>
+<body style="background-color: honeydew;">
+<!-- Modal -->
+<div class="modal fade" id="staticBackdrop" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="staticBackdropLabel"><label class="fh5">Add Task</label></h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="input-group">
+        	<input type="text" id="todolistvalue" class="form-control text-font" name="">
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary" onclick="addtodolist()" data-dismiss="modal">Add</button>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="dis_4 text-center">
+		TO DO LIST
+</div>
+<div class="row col-md-12 justify-content-end">
+	<button class="btn btn-outline-secondary" data-toggle="modal" data-target="#staticBackdrop">
+		ADD TASK
+	</button>
+</div>
+<div class="p-md-5" id="maintodo">
+	<div class="row px-3 mx-0 col-md-12 bg-dark rounded-lg demo" id="demo">
+	<!-- 	<div class="col-md-12 d-flex p-3 child class1" ondragover="allowDrop(event)" ondrop="drop(event)" draggable="true" ondragstart="dragStart(event)" id=class1 >
+			<div class="col-md-1 p-2 bg-light rounded-lg text-center">1
+			</div>
+			<div class="col-md-10 p-2 bg-light ml-2 rounded-left ">'+todo[todo.length-1]+'
+			</div>
+			<div class="bg-light col-md-1 rounded-right" onclick="delete_todo('+todo.length+')" style="cursor: pointer;">
+				<i class="fa-solid fa-circle-minus p-2">
+					
+				</i>
+			</div>
+		</div>
+		<div class="col-md-12 d-flex p-3 child class2" ondragover="allowDrop(event)" ondrop="drop(event)" draggable="true" ondragstart="dragStart(event)" id="class2" >
+			<div class="col-md-1 p-2 bg-light rounded-lg text-center">2
+			</div>
+			<div class="col-md-10 p-2 bg-light ml-2 rounded-left ">'+todo[todo.length-1]+'
+			</div>
+			<div class="bg-light col-md-1 rounded-right" onclick="delete_todo('+todo.length+')" style="cursor: pointer;">
+				<i class="fa-solid fa-circle-minus p-2">
+					
+				</i>
+			</div>
+		</div>
+		<div class="col-md-12 d-flex p-3 child class3" ondragover="allowDrop(event)" ondrop="drop(event)" draggable="true" ondragstart="dragStart(event)" id="class3" >
+			<div class="col-md-1 p-2 bg-light rounded-lg text-center">3
+			</div>
+			<div class="col-md-10 p-2 bg-light ml-2 rounded-left ">'+todo[todo.length-1]+'
+			</div>
+			<div class="bg-light col-md-1 rounded-right" onclick="delete_todo('+todo.length+')" style="cursor: pointer;">
+				<i class="fa-solid fa-circle-minus p-2">
+					
+				</i>
+			</div>
+		</div> -->
+	</div>
+
+	<!-- <div class="row px-3 mx-0 col-md-12 bg-dark rounded-lg demo"></div> -->
+</div>
+
+
+<!-- MH47 20220016831 -->
+<script type="text/javascript">
+	function $(id){return document.getElementById(id)}
+	var todo = [],len=1;
+	const mainelement = $('demo');
+	// const containers = document.querySelectorAll('.demo');
+	// const draggables = document.querySelectorAll(".child");
+	// draggables.forEach(draggable => {
+	// 	draggable.addEventListener('dragstart',() => {
+	// 		// draggable.classList.add('dragging')
+
+	// 	})
+	// 	draggable.addEventListener('dragend',() =>{
+	// 		draggable.classList.remove('dragging')
+
+	// 	})
+	// })
+
+	// containers.forEach(container =>{
+	// 	container.addEventListener('dragover',e =>{
+	// 		// e.preventDefault()
+	// 		console.log(event)
+	// 		console.log(event.target)
+	// 		// const afterElement = getDragAfterElement(container , e.clientY)
+	// 		const draggable = document.querySelector('.dragging')
+	// 		// if (afterElement == null) {
+	// 			container.appendChild(draggable);
+	// 		// }else{
+	// 		// 	container.insertBefore(draggable,afterElement)
+	// 		// }
+
+	// 	})
+	// })
+	// function getDragAfterElement(container, y){
+	// 	const draggableElement = [...container.querySelectorAll('.child:not(.dragging)')]
+	// 		return draggableElement.reduce((closest, child)=>{
+	// 			const box =child.getBoundingClientRect()
+	// 			const offset = y-box.top - box.heigth / 2
+	// 			if(offset < 0 && offset > closest.offset){
+	// 				return {offset: offset, element: child}
+	// 			}else{
+	// 				return closest
+	// 			}
+	// 		},{offset: Number.NEGATIVE_INFINITY }).element
+	// }
+
+
+	function allowDrop(event) {
+  event.preventDefault();}
+
+	function arrayRemove(arr, value){return arr.filter(function(ele){return ele != value; });}
+	function addtodolist(){
+		var element,tag,egtxt,id_,sr_id;
+		var todovalue =	document.getElementById('todolistvalue').value;
+		todo.push(todovalue);
+		console.log(todo);
+		tag = document.createElement("div");
+		mainelement.appendChild(tag);
+		id_ = 'class'+len;
+		sr_id = id_+'_sr';
+		tag.classList.add("col-md-12","d-flex","p-3","my-1","child","text-font",id_);
+		tag.setAttribute("id",id_);
+
+		var txt = '';
+		txt +='<div class="col-md-1 p-2 bg-light rounded-lg text-center" id="'+sr_id+'">'+todo.length+'</div><div class="col-md-10 p-2 bg-light ml-2 rounded-left ">'+todo[todo.length-1]+'</div><div class="bg-light col-md-1 rounded-right" onclick="delete_todo('+len+')" style="cursor: pointer;"><i class="fa-solid fa-circle-minus p-2"></i></div>';
+		tag.innerHTML = txt;
+		tag.setAttribute("draggable", "true");
+		tag.setAttribute("ondragover","allowDrop(event)");
+		tag.setAttribute("ondrop","drop(event,this)");
+		tag.setAttribute("ondragstart","dragStart(event)");
+		document.getElementById('todolistvalue').value = " ";	
+		len++;
+
+	}
+	function delete_todo(x){
+		var element = document.getElementById("class"+x),elem,remove_,relen,no_class;
+		element.remove();
+		console.log("class"+x);
+		todo.splice(x-1,1);
+		console.log(todo)
+		elem = mainelement.getElementsByClassName("child")
+		console.log(elem);
+		for (var i = 1; i <= elem.length; i++) {
+			remove_ = elem[i - 1].classList
+			relen = remove_[remove_.length - 1]
+			remove_.remove(relen)
+			remove_.add('class'+i)
+			elem[i - 1].id = 'class'+i;
+			var sr_id = 'class'+i+'_sr'
+			console.log(sr_id);
+			elem[i - 1].children[0].innerHTML = i;
+			elem[i - 1].children[0].id = sr_id;
+			elem[i - 1].children[2].setAttribute("onclick","delete_todo("+i+")");
+			// document.getElementById(sr_id).innerHTML = i ;
+		}
+	// 	console.log(todo);
+	// 	mainelement.innerHTML = "";
+	// 	for(var i = 0; i<todo.length; i++){
+	// 		var txt = '',id_;
+	// 		len=i+1;
+	// 		tag = document.createElement("div");
+	// 		id_ = 'class'+len;
+	// 		tag.setAttribute("id",id_);
+	// 		mainelement.appendChild(tag);
+	// 		tag.classList.add("col-md-12","d-flex","p-3","my-1","child");
+	// 		txt +='<div class="col-md-1 p-2 bg-light rounded-lg text-center">'+len+'</div><div class="col-md-10 p-2 bg-light ml-2 rounded-left ">'+todo[i]+'</div><div class="bg-light col-md-1 rounded-right" onclick="delete_todo('+len+')" style="cursor: pointer;"><i class="fa-solid fa-circle-minus p-2"></i></div>';
+	// 			tag.innerHTML = txt;
+	// 			tag.setAttribute("draggable", "true");
+	// 			tag.setAttribute("ondragover","allowDrop(event)");
+	// 			tag.setAttribute("ondrop","drop(event,this)");
+	// 			tag.setAttribute("ondragstart","dragStart(event)");
+	// 			len++;
+
+	// 	// 	document.getElementById('todolistvalue').value = " ";
+	// 	// 	console.log("array run");
+	// 	// }
+	// }
+	len --;
+	}
+
+	function drop(event,el){
+		console.log(event);
+	  	var data = event.dataTransfer.getData("Text");
+	  	console.log(data);
+	  	console.log(document.getElementById(data))
+
+		el.after(document.getElementById(data));
+	}
+	function dragStart(event) {
+	  event.dataTransfer.setData("Text", event.target.id);
+	}
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+        <script type="text/javascript">
+            $(function () {
+  $('[data-toggle="popover"]').popover()
+})
+        </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-fQybjgWLrvvRgtW6bFlB7jaZrFsaBXjsOMm/tB9LTS58ONXgqbR9W8oWht/amnpF" crossorigin="anonymous"></script>
+   
+</body>
+</html>
+<!-- 
+<script>
+function myFunction() {
+var len = document.getElementsByClassName("example").length;
+  const list = document.getElementsByClassName("example")[0];
+  list.innerHTML = len;
+}
+</script>
+ -->
