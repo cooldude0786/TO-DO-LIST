@@ -41,13 +41,12 @@
 .tooltip_{
 	height: 30px;
 }
-@media screen and (min-device-width: 320px) and (max-device-width:786){
-	.DAILOG_BOX{
-		max-width: 700px;
-	}
+/*.main-body{height: calc(100vh - 149px);}*/
+@media screen and (min-width: 576px)	{
+	.modal-dialog{max-width: 95%;}
 	.DAILOG_BOX_BUTTON{
 		width: 18%;
-		font-size: 25px;
+		font-size: 35px;
 	}
 	.DAILOG_BOX_INPUT{
 		font-size: 30px;
@@ -55,6 +54,26 @@
 	.DAILOG_BOX_CLOSE{
 		font-size: 48px;
 	}
+}
+@media screen and (min-device-width: 320px) and (max-device-width: 768px){
+	.btn{
+		font-size: 30px;
+	}
+	.text-font {
+    font-size: 35px;
+	}
+}
+.footer1{
+	position: fixed;
+	bottom: 0px;
+ 	background: darkkhaki;
+   	}
+.icon_size{
+	font-size: 30px;
+}
+.social a{
+	text-decoration: none;
+	color:black;
 }
 </style>
 </head>
@@ -102,57 +121,59 @@
     </div>
   </div>
 </div>
-<div class="dis_4 text-center">
-		TO DO LIST
-</div>
-<div class="row col-md-12 justify-content-end">
-	<button class="btn btn-outline-secondary" data-toggle="modal" data-target="#staticBackdrop">
-		ADD TASK
-	</button>
-</div>
-<div class="p-md-5" id="maintodo">
-	<div class="row px-3 mx-0 col-md-12 bg-dark rounded-lg demo" id="demo">
-		<!-- <div class="col-md-12 d-flex p-3 my-1 child text-font" id="class1" draggable="true" ondragover="allowDrop(event)" ondrop="drop(event,this)"  ondragstart="dragStart(event)">
-			<div class="col-md-1 p-2 bg-light rounded-lg text-center" id="'+sr_id+'">
-			'+1+'
-			</div>
-			<div class="col-md-10 p-2 bg-light ml-2 rounded-left ">'+todo[todo.length-1]+'
-				<UL class="ul1" draggable="false">
-					<li draggable="true" ondragover="allowDrop(event)" ondrop="drop(event,this)" ondragstart="dragStart(event)" id="li_sd1">1.1</li>
-					<li draggable="true" ondragover="allowDrop(event)" ondrop="drop(event,this)" ondragstart="dragStart(event)" id="li_sd2">1.2</li>
-				</UL>
-			</div>
-			<div class="bg-light col-md-1 p-0 rounded-right">
-				<i class="fa-circle-plus px-2 fa-solid m-0 mt-2 p-0 p-1" data-toggle="modal" data-target="#myModal" style="cursor: pointer;" onclick="chang_parameter('class1',0)">	
-				</i>
-				<i class="fa-circle-minus px-2 fa-solid m-0 mt-2 p-0 p-1" style="cursor: pointer;" onclick="delete_todo('+len+')">	
-				</i>
-			</div>
-		</div> -->
-		<!-- <div class="col-md-12 d-flex p-3 my-1 child text-font" id="class2" draggable="true" ondragover="allowDrop(event)" ondrop="drop(event,this)" ondragstart="dragStart(event)">
-			<div class="col-md-1 p-2 bg-light rounded-lg text-center" id="'+sr_id+'">
-			'+1+'
-			</div>
-			<div class="col-md-10 p-2 bg-light ml-2 rounded-left ">'+todo[todo.length-1]+'
-				<UL class="ul1">
-					<li draggable="true" ondragover="allowDrop(event)" ondrop="drop(event,this)" ondragstart="dragStart(event)" id="li_sd1">2.1</li>
-					<li draggable="true" ondragover="allowDrop(event)" ondrop="drop(event,this)" ondragstart="dragStart(event)" id="li_sd2">2.2</li>
-				</UL>
-			</div>
-			<div class="bg-light col-md-1 p-0 rounded-right">
-				<i class="fa-circle-plus px-2 fa-solid m-0 mt-2 p-0 p-1" data-toggle="modal" data-target="#myModal" style="cursor: pointer;" onclick="chang_parameter('class1',0)">	
-				</i>
-				<i class="fa-circle-minus px-2 fa-solid m-0 mt-2 p-0 p-1" style="cursor: pointer;" onclick="delete_todo('+len+')">	
-				</i>
-			</div>
-		</div> -->
+<div class="main-body">
+	<div class="dis_4 text-center">
+			TO DO LIST
 	</div>
-	<!-- <div class="row px-3 mx-0 col-md-12 bg-dark rounded-lg demo"></div> -->
-</div>
-<div class="align-items-center d-flex developer_info flex-column p-md-4">
-	<div class="border-bottom h-2 py-2 text-center w-100">Developer</div>
-	<div class="py-2"><img src="developer.jpg" style="height: 19rem;"></div>
-	<div style="font-family: 'Dancing Script', cursive;font-size: 20px;">Khizar Shaikh</div>
+	<div class="row col-md-12 justify-content-end">
+		<button class="btn btn-outline-secondary" data-toggle="modal" data-target="#staticBackdrop">
+			ADD TASK
+		</button>
+	</div>
+	<div class="p-md-5" id="maintodo">
+		<div class="row px-3 mx-0 col-md-12 bg-dark rounded-lg demo" id="demo">
+			<!-- <div class="col-md-12 d-flex p-3 my-1 child text-font" id="class1" draggable="true" ondragover="allowDrop(event)" ondrop="drop(event,this)"  ondragstart="dragStart(event)">
+				<div class="col-md-1 p-2 bg-light rounded-lg text-center" id="'+sr_id+'">
+				'+1+'
+				</div>
+				<div class="col-md-10 p-2 bg-light ml-2 rounded-left ">'+todo[todo.length-1]+'
+					<UL class="ul1" draggable="false">
+						<li draggable="true" ondragover="allowDrop(event)" ondrop="drop(event,this)" ondragstart="dragStart(event)" id="li_sd1">1.1</li>
+						<li draggable="true" ondragover="allowDrop(event)" ondrop="drop(event,this)" ondragstart="dragStart(event)" id="li_sd2">1.2</li>
+					</UL>
+				</div>
+				<div class="bg-light col-md-1 p-0 rounded-right">
+					<i class="fa-circle-plus px-2 fa-solid m-0 mt-2 p-0 p-1" data-toggle="modal" data-target="#myModal" style="cursor: pointer;" onclick="chang_parameter('class1',0)">	
+					</i>
+					<i class="fa-circle-minus px-2 fa-solid m-0 mt-2 p-0 p-1" style="cursor: pointer;" onclick="delete_todo('+len+')">	
+					</i>
+				</div>
+			</div> -->
+			<!-- <div class="col-md-12 d-flex p-3 my-1 child text-font" id="class2" draggable="true" ondragover="allowDrop(event)" ondrop="drop(event,this)" ondragstart="dragStart(event)">
+				<div class="col-md-1 p-2 bg-light rounded-lg text-center" id="'+sr_id+'">
+				'+1+'
+				</div>
+				<div class="col-md-10 p-2 bg-light ml-2 rounded-left ">'+todo[todo.length-1]+'
+					<UL class="ul1">
+						<li draggable="true" ondragover="allowDrop(event)" ondrop="drop(event,this)" ondragstart="dragStart(event)" id="li_sd1">2.1</li>
+						<li draggable="true" ondragover="allowDrop(event)" ondrop="drop(event,this)" ondragstart="dragStart(event)" id="li_sd2">2.2</li>
+					</UL>
+				</div>
+				<div class="bg-light col-md-1 p-0 rounded-right">
+					<i class="fa-circle-plus px-2 fa-solid m-0 mt-2 p-0 p-1" data-toggle="modal" data-target="#myModal" style="cursor: pointer;" onclick="chang_parameter('class1',0)">	
+					</i>
+					<i class="fa-circle-minus px-2 fa-solid m-0 mt-2 p-0 p-1" style="cursor: pointer;" onclick="delete_todo('+len+')">	
+					</i>
+				</div>
+			</div> -->
+		</div>
+		<!-- <div class="row px-3 mx-0 col-md-12 bg-dark rounded-lg demo"></div> -->
+	</div>
+	<div class="align-items-center d-flex developer_info flex-column p-md-4">
+		<div class="border-bottom h-2 py-2 text-center w-100">Developer</div>
+		<div class="py-2"><img src="developer.jpg" style="height: 19rem;"></div>
+		<div style="font-family: 'Dancing Script', cursive;font-size: 20px;">Khizar Shaikh</div>
+	</div>
 </div>
 
 <footer class="footer1 col-12 footer1 p-2">
@@ -188,11 +209,11 @@
 		mainelement.appendChild(tag);
 		id_ = 'class'+len;
 		sr_id = id_+'_sr';
-		tag.classList.add("col-md-12","d-flex","p-3","my-1","child","text-font",id_);
+		tag.classList.add("col-md-12","d-flex","p-3","row","my-1","child","text-font",id_);
 		tag.setAttribute("id",id_);
 		var txt = '';
 		// txt +='<div class="col-md-1 p-2 bg-light rounded-lg text-center" id="'+sr_id+'">'+todo.length+'</div><div class="col-md-10 p-2 bg-light ml-2 rounded-left ">'+todo[todo.length-1]+'</div><div class="bg-light col-md-1 rounded-right" onclick="delete_todo('+len+')" style="cursor: pointer;"><i class="fa-solid fa-circle-minus p-2"></i></div>';
-		txt +='<div class="col-md-1 p-2 bg-light rounded-lg text-center" id="'+sr_id+'">'+todo.length+'</div><div class="col-md-10 p-2 bg-light ml-2 rounded-left ">'+todo[todo.length-1]+'</div><div class="align-items-center bg-light col-md-1 d-flex justify-content-md-around p-0 rounded-right"><i class="fa-circle-plus  fa-solid" data-toggle="modal" data-target="#myModal" style="cursor: pointer;" onclick="chang_parameter('+id_+','+len+')">	</i><i class="fa-circle-minus fa-solid" style="cursor: pointer;" onclick="delete_todo('+len+')"></i></div>'; 
+		txt +='<div class="col-md-1 p-2 bg-light rounded-lg text-center" id="'+sr_id+'">'+todo.length+'</div><div class="col-md-9 p-2 bg-light ml-2 rounded-left ">'+todo[todo.length-1]+'</div><div class="align-items-center bg-light col-md-1 d-flex justify-content-md-around p-0 rounded "><i class="fa-circle-plus  fa-solid" data-toggle="modal" data-target="#myModal" style="cursor: pointer;" onclick="chang_parameter('+id_+','+len+')">	</i><i class="fa-circle-minus fa-solid" style="cursor: pointer;" onclick="delete_todo('+len+')"></i></div>'; 
 		tag.innerHTML = txt;
 		tag.setAttribute("draggable", "true");
 		tag.setAttribute("ondragover","allowDrop(event)");
