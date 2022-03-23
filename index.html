@@ -2,8 +2,12 @@
 <html>
 <head>
 	<title>Index</title>
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@500&display=swap" rel="stylesheet">
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css" integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn" crossorigin="anonymous">
 	<script src="https://kit.fontawesome.com/c153436894.js" crossorigin="anonymous"></script>
+	<link rel="stylesheet" type="text/css" href="1.css">
 	<style type="text/css">
 		.child.dragging{
 			opacity: .5;
@@ -19,27 +23,81 @@
 				font-size: 25px;
 			}
 		}
-	</style>
+		.developer_info{
+			justify-content: center;
+		}
+		.footer1{   
+   		background: darkkhaki;}
+		.icon_size{
+			font-size: 30px;
+		}
+		.social a{
+			text-decoration: none;
+			color:black;
+		}
+		.tooltip-inner{
+  background-color:#000000;
+}
+.tooltip_{
+	height: 30px;
+}
+@media screen and (min-device-width: 320px) and (max-device-width:786){
+	.DAILOG_BOX{
+		max-width: 700px;
+	}
+	.DAILOG_BOX_BUTTON{
+		width: 18%;
+		font-size: 25px;
+	}
+	.DAILOG_BOX_INPUT{
+		font-size: 30px;
+	}
+	.DAILOG_BOX_CLOSE{
+		font-size: 48px;
+	}
+}
+</style>
 </head>
 <body style="background-color: honeydew;">
 <!-- Modal -->
-<div class="modal fade" id="staticBackdrop" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-  <div class="modal-dialog">
+<div class="modal fade" id="staticBackdrop" data-backdrop="static" data-keyboard="false"  aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog DAILOG_BOX">
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title" id="staticBackdropLabel"><label class="fh5">Add Task</label></h5>
+        <button type="button" class="close DAILOG_BOX_CLOSE	" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="input-group">
+        	<input type="text" id="todolistvalue" class="form-control text-font DAILOG_BOX_INPUT" name="">
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary DAILOG_BOX_BUTTON" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary DAILOG_BOX_BUTTON" id="addtodo" onclick="addtodolist()" data-dismiss="modal">Add</button>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="modal fade" id="myModal" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="myModal"><label class="fh5">Add Sub Task</label></h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
       <div class="modal-body">
         <div class="input-group">
-        	<input type="text" id="todolistvalue" class="form-control text-font" name="">
+        	<input type="text" id="subtodovalue" class="form-control text-font" name="">
         </div>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary" onclick="addtodolist()" data-dismiss="modal">Add</button>
+        <button type="button" class="btn btn-primary" id="addtodo" onclick="add_todo()" data-dismiss="modal">Add</button>
       </div>
     </div>
   </div>
@@ -54,97 +112,74 @@
 </div>
 <div class="p-md-5" id="maintodo">
 	<div class="row px-3 mx-0 col-md-12 bg-dark rounded-lg demo" id="demo">
-	<!-- 	<div class="col-md-12 d-flex p-3 child class1" ondragover="allowDrop(event)" ondrop="drop(event)" draggable="true" ondragstart="dragStart(event)" id=class1 >
-			<div class="col-md-1 p-2 bg-light rounded-lg text-center">1
+		<!-- <div class="col-md-12 d-flex p-3 my-1 child text-font" id="class1" draggable="true" ondragover="allowDrop(event)" ondrop="drop(event,this)"  ondragstart="dragStart(event)">
+			<div class="col-md-1 p-2 bg-light rounded-lg text-center" id="'+sr_id+'">
+			'+1+'
 			</div>
 			<div class="col-md-10 p-2 bg-light ml-2 rounded-left ">'+todo[todo.length-1]+'
+				<UL class="ul1" draggable="false">
+					<li draggable="true" ondragover="allowDrop(event)" ondrop="drop(event,this)" ondragstart="dragStart(event)" id="li_sd1">1.1</li>
+					<li draggable="true" ondragover="allowDrop(event)" ondrop="drop(event,this)" ondragstart="dragStart(event)" id="li_sd2">1.2</li>
+				</UL>
 			</div>
-			<div class="bg-light col-md-1 rounded-right" onclick="delete_todo('+todo.length+')" style="cursor: pointer;">
-				<i class="fa-solid fa-circle-minus p-2">
-					
+			<div class="bg-light col-md-1 p-0 rounded-right">
+				<i class="fa-circle-plus px-2 fa-solid m-0 mt-2 p-0 p-1" data-toggle="modal" data-target="#myModal" style="cursor: pointer;" onclick="chang_parameter('class1',0)">	
+				</i>
+				<i class="fa-circle-minus px-2 fa-solid m-0 mt-2 p-0 p-1" style="cursor: pointer;" onclick="delete_todo('+len+')">	
 				</i>
 			</div>
-		</div>
-		<div class="col-md-12 d-flex p-3 child class2" ondragover="allowDrop(event)" ondrop="drop(event)" draggable="true" ondragstart="dragStart(event)" id="class2" >
-			<div class="col-md-1 p-2 bg-light rounded-lg text-center">2
+		</div> -->
+		<!-- <div class="col-md-12 d-flex p-3 my-1 child text-font" id="class2" draggable="true" ondragover="allowDrop(event)" ondrop="drop(event,this)" ondragstart="dragStart(event)">
+			<div class="col-md-1 p-2 bg-light rounded-lg text-center" id="'+sr_id+'">
+			'+1+'
 			</div>
 			<div class="col-md-10 p-2 bg-light ml-2 rounded-left ">'+todo[todo.length-1]+'
+				<UL class="ul1">
+					<li draggable="true" ondragover="allowDrop(event)" ondrop="drop(event,this)" ondragstart="dragStart(event)" id="li_sd1">2.1</li>
+					<li draggable="true" ondragover="allowDrop(event)" ondrop="drop(event,this)" ondragstart="dragStart(event)" id="li_sd2">2.2</li>
+				</UL>
 			</div>
-			<div class="bg-light col-md-1 rounded-right" onclick="delete_todo('+todo.length+')" style="cursor: pointer;">
-				<i class="fa-solid fa-circle-minus p-2">
-					
+			<div class="bg-light col-md-1 p-0 rounded-right">
+				<i class="fa-circle-plus px-2 fa-solid m-0 mt-2 p-0 p-1" data-toggle="modal" data-target="#myModal" style="cursor: pointer;" onclick="chang_parameter('class1',0)">	
 				</i>
-			</div>
-		</div>
-		<div class="col-md-12 d-flex p-3 child class3" ondragover="allowDrop(event)" ondrop="drop(event)" draggable="true" ondragstart="dragStart(event)" id="class3" >
-			<div class="col-md-1 p-2 bg-light rounded-lg text-center">3
-			</div>
-			<div class="col-md-10 p-2 bg-light ml-2 rounded-left ">'+todo[todo.length-1]+'
-			</div>
-			<div class="bg-light col-md-1 rounded-right" onclick="delete_todo('+todo.length+')" style="cursor: pointer;">
-				<i class="fa-solid fa-circle-minus p-2">
-					
+				<i class="fa-circle-minus px-2 fa-solid m-0 mt-2 p-0 p-1" style="cursor: pointer;" onclick="delete_todo('+len+')">	
 				</i>
 			</div>
 		</div> -->
 	</div>
-
 	<!-- <div class="row px-3 mx-0 col-md-12 bg-dark rounded-lg demo"></div> -->
 </div>
+<div class="align-items-center d-flex developer_info flex-column p-md-4">
+	<div class="border-bottom h-2 py-2 text-center w-100">Developer</div>
+	<div class="py-2"><img src="developer.jpg" style="height: 19rem;"></div>
+	<div style="font-family: 'Dancing Script', cursive;font-size: 20px;">Khizar Shaikh</div>
+</div>
+
+<footer class="footer1 col-12 footer1 p-2">
+	<div class="d-flex justify-content-center pb-3">
+		<div class="px-2 icon_size social"><a href=""><i class="fa-brands fa-instagram" data-toggle="tooltip" data-placement="left" data-html="true" title="<img src='insta.jpg'height=150px;width=100px; />"></i></a></div>	
+		<div class="px-2 icon_size social"><a href="https://www.linkedin.com/in/khizar-shaikh-3a541022a"><i class="fa-brands fa-linkedin" data-toggle="tooltip" data-placement="top" data-html="true" title="https://www.linkedin.com/in/khizar-shaikh-3a541022a"></i></a></div>
+		<div class="px-2 icon_size social"><a href="https://github.com/cooldude0786" data-toggle="tooltip" data-placement="right" data-html="true" title="https://github.com/cooldude0786"><i class="fa-brands fa-github"></i></a></div>
+	</div>
+	<div class="d-flex justify-content-center pt-5">
+	<div>Copyrigth &copy; 2022 Khizar Shiakh. All rigths reserved.</div>
+	</div>
+</footer>
 
 
-<!-- MH47 20220016831 -->
+
 <script type="text/javascript">
 	function $(id){return document.getElementById(id)}
-	var todo = [],len=1;
+	var todo = [],len=1,classname,classindex;
+	function chang_parameter(){classname=arguments[0],classindex=arguments[1]-1;	}
 	const mainelement = $('demo');
-	// const containers = document.querySelectorAll('.demo');
-	// const draggables = document.querySelectorAll(".child");
-	// draggables.forEach(draggable => {
-	// 	draggable.addEventListener('dragstart',() => {
-	// 		// draggable.classList.add('dragging')
-
-	// 	})
-	// 	draggable.addEventListener('dragend',() =>{
-	// 		draggable.classList.remove('dragging')
-
-	// 	})
-	// })
-
-	// containers.forEach(container =>{
-	// 	container.addEventListener('dragover',e =>{
-	// 		// e.preventDefault()
-	// 		console.log(event)
-	// 		console.log(event.target)
-	// 		// const afterElement = getDragAfterElement(container , e.clientY)
-	// 		const draggable = document.querySelector('.dragging')
-	// 		// if (afterElement == null) {
-	// 			container.appendChild(draggable);
-	// 		// }else{
-	// 		// 	container.insertBefore(draggable,afterElement)
-	// 		// }
-
-	// 	})
-	// })
-	// function getDragAfterElement(container, y){
-	// 	const draggableElement = [...container.querySelectorAll('.child:not(.dragging)')]
-	// 		return draggableElement.reduce((closest, child)=>{
-	// 			const box =child.getBoundingClientRect()
-	// 			const offset = y-box.top - box.heigth / 2
-	// 			if(offset < 0 && offset > closest.offset){
-	// 				return {offset: offset, element: child}
-	// 			}else{
-	// 				return closest
-	// 			}
-	// 		},{offset: Number.NEGATIVE_INFINITY }).element
-	// }
-
-
 	function allowDrop(event) {
   event.preventDefault();}
-
 	function arrayRemove(arr, value){return arr.filter(function(ele){return ele != value; });}
 	function addtodolist(){
+		document.getElementById('addtodo').disabled = true;
+		document.getElementById('addtodo').style.cursor = "not-allowed";
+		console.log($('addtodo'))
 		var element,tag,egtxt,id_,sr_id;
 		var todovalue =	document.getElementById('todolistvalue').value;
 		todo.push(todovalue);
@@ -155,9 +190,9 @@
 		sr_id = id_+'_sr';
 		tag.classList.add("col-md-12","d-flex","p-3","my-1","child","text-font",id_);
 		tag.setAttribute("id",id_);
-
 		var txt = '';
-		txt +='<div class="col-md-1 p-2 bg-light rounded-lg text-center" id="'+sr_id+'">'+todo.length+'</div><div class="col-md-10 p-2 bg-light ml-2 rounded-left ">'+todo[todo.length-1]+'</div><div class="bg-light col-md-1 rounded-right" onclick="delete_todo('+len+')" style="cursor: pointer;"><i class="fa-solid fa-circle-minus p-2"></i></div>';
+		// txt +='<div class="col-md-1 p-2 bg-light rounded-lg text-center" id="'+sr_id+'">'+todo.length+'</div><div class="col-md-10 p-2 bg-light ml-2 rounded-left ">'+todo[todo.length-1]+'</div><div class="bg-light col-md-1 rounded-right" onclick="delete_todo('+len+')" style="cursor: pointer;"><i class="fa-solid fa-circle-minus p-2"></i></div>';
+		txt +='<div class="col-md-1 p-2 bg-light rounded-lg text-center" id="'+sr_id+'">'+todo.length+'</div><div class="col-md-10 p-2 bg-light ml-2 rounded-left ">'+todo[todo.length-1]+'</div><div class="align-items-center bg-light col-md-1 d-flex justify-content-md-around p-0 rounded-right"><i class="fa-circle-plus  fa-solid" data-toggle="modal" data-target="#myModal" style="cursor: pointer;" onclick="chang_parameter('+id_+','+len+')">	</i><i class="fa-circle-minus fa-solid" style="cursor: pointer;" onclick="delete_todo('+len+')"></i></div>'; 
 		tag.innerHTML = txt;
 		tag.setAttribute("draggable", "true");
 		tag.setAttribute("ondragover","allowDrop(event)");
@@ -165,16 +200,17 @@
 		tag.setAttribute("ondragstart","dragStart(event)");
 		document.getElementById('todolistvalue').value = " ";	
 		len++;
-
+		document.getElementById('addtodo').disabled = false
+		document.getElementById('addtodo').style.cursor = "pointer"
 	}
 	function delete_todo(x){
 		var element = document.getElementById("class"+x),elem,remove_,relen,no_class;
 		element.remove();
-		console.log("class"+x);
+		// console.log("class"+x);
 		todo.splice(x-1,1);
-		console.log(todo)
+		// console.log(todo)
 		elem = mainelement.getElementsByClassName("child")
-		console.log(elem);
+		// console.log(elem);
 		for (var i = 1; i <= elem.length; i++) {
 			remove_ = elem[i - 1].classList
 			relen = remove_[remove_.length - 1]
@@ -182,47 +218,99 @@
 			remove_.add('class'+i)
 			elem[i - 1].id = 'class'+i;
 			var sr_id = 'class'+i+'_sr'
-			console.log(sr_id);
+			var class_name = 'class'+i
 			elem[i - 1].children[0].innerHTML = i;
 			elem[i - 1].children[0].id = sr_id;
-			elem[i - 1].children[2].setAttribute("onclick","delete_todo("+i+")");
+		    elem[i - 1].children[2].children[1].setAttribute("onclick","delete_todo("+i+")")
+		    elem[i - 1].children[2].children[0].setAttribute("onclick","chang_parameter("+class_name+","+i+")" )
+			// elem[i - 1].children[2].children[1]setAttribute("onclick","delete_todo("+i+")");
 			// document.getElementById(sr_id).innerHTML = i ;
 		}
-	// 	console.log(todo);
-	// 	mainelement.innerHTML = "";
-	// 	for(var i = 0; i<todo.length; i++){
-	// 		var txt = '',id_;
-	// 		len=i+1;
-	// 		tag = document.createElement("div");
-	// 		id_ = 'class'+len;
-	// 		tag.setAttribute("id",id_);
-	// 		mainelement.appendChild(tag);
-	// 		tag.classList.add("col-md-12","d-flex","p-3","my-1","child");
-	// 		txt +='<div class="col-md-1 p-2 bg-light rounded-lg text-center">'+len+'</div><div class="col-md-10 p-2 bg-light ml-2 rounded-left ">'+todo[i]+'</div><div class="bg-light col-md-1 rounded-right" onclick="delete_todo('+len+')" style="cursor: pointer;"><i class="fa-solid fa-circle-minus p-2"></i></div>';
-	// 			tag.innerHTML = txt;
-	// 			tag.setAttribute("draggable", "true");
-	// 			tag.setAttribute("ondragover","allowDrop(event)");
-	// 			tag.setAttribute("ondrop","drop(event,this)");
-	// 			tag.setAttribute("ondragstart","dragStart(event)");
-	// 			len++;
-
-	// 	// 	document.getElementById('todolistvalue').value = " ";
-	// 	// 	console.log("array run");
-	// 	// }
-	// }
 	len --;
 	}
-
 	function drop(event,el){
-		console.log(event);
+		// console.log(event);
 	  	var data = event.dataTransfer.getData("Text");
-	  	console.log(data);
-	  	console.log(document.getElementById(data))
-
+	  	// console.log(el);
+	  	// console.log(document.getElementById(data))
 		el.after(document.getElementById(data));
+		elem = mainelement.getElementsByClassName("child")
+		for (var i = 1; i <= elem.length; i++) {
+			elem[i - 1].children[0].innerHTML = i;
+			if(elem[i - 1].children[1].children.length != 0)
+			for (var j = 1; j <=elem[i-1].children[1].children[0].children.length ; j++) {
+				elem[i-1].children[1].children[0].children[j-1].children[0].innerHTML = i+"."+j;
+			}
+		}
 	}
-	function dragStart(event) {
-	  event.dataTransfer.setData("Text", event.target.id);
+	function dragStart(event)
+	 {
+	 	event.dataTransfer.setData("Text", event.target.id);
+	 	// console.log(event.target.id)
+	 	if(event.target.id.includes("li")){
+	 		var mainelem = document.getElementById("demo")
+	 		for (var i = 1; i <=document.getElementById('demo').getElementsByClassName("child").length  ; i++) {
+	 			var elem = document.getElementById("class"+i)
+	 			document.getElementById("class"+i).removeAttribute("ondrop")
+	 			for (var j = 1; j <=elem.children[1].getElementsByTagName('li').length ; j++) {
+	 				elem.children[1].getElementsByTagName('li')[j-1].setAttribute("ondrop","drop(event,this)")
+	 			}
+	 		}
+	 		console.log("found")
+	 	}else{
+	 		// elem.children[1].getElementsByTagName('li').length
+	 		for (var i = 1; i <=document.getElementById('demo').getElementsByClassName("child").length  ; i++) {
+	 			var elem = document.getElementById("class"+i)
+	 			for (var j = 1; j <=elem.children[1].getElementsByTagName('li').length ; j++) {
+	 				elem.children[1].getElementsByTagName('li')[j-1].removeAttribute("ondrop")
+	 			}
+	 			document.getElementById("class"+i).setAttribute("ondrop","drop(event,this)")
+	 		}
+	 		// console.log("not found")
+	 	}
+	}
+	function add_todo(){
+		$("#myModal").modal();
+		var tag , mainelement , todovalue,txt='',sub_li_id
+		mainelement = document.getElementById(classname.id);
+		todovalue = document.getElementById('subtodovalue').value
+		if(todovalue.length == 0){
+			 console.log('empty sub todo')
+			 return 
+		}
+		if (document.getElementsByClassName('child')[classindex].children[1].getElementsByTagName('ul').length < 1)
+			{
+			// console.log("ul len of"+classname.id+" "+document.getElementsByClassName('child')[classindex].children[1].getElementsByTagName('ul').length)
+		 	tag = document.createElement("ul")
+				tag.setAttribute("id","subUl"+classname.id)
+				mainelement.children[1].appendChild(tag)
+				tag.classList.add("mb-1")}
+		sub_li_id = document.getElementsByClassName('child')[classindex].children[1].children[0].children.length + 1
+		// console.log(sub_li_id+" for the li")
+		var y = document.createElement("LI");
+		y.setAttribute("id","li_id"+sub_li_id+classname.id)
+		document.getElementById("subUl"+classname.id).appendChild(y);
+		y.classList.add("d-flex","row")
+		txt = '<div>'+(classindex +1)+'.'+sub_li_id+'</div><div class="col-sm-10">'+todovalue+'</div><div class="align-items-center bg-light col-md-1 d-flex m-0 p-0 rounded-right"><i class="fa-circle-minus px-2 fa-solid" style="cursor: pointer;" id="li_id'+(sub_li_id+classname.id)+'" onclick="delete_sub(this)"></i></div>';
+		y.innerHTML = txt
+		y.setAttribute("draggable", "true");
+		y.setAttribute("ondragover","allowDrop(event)");
+		y.setAttribute("ondrop","drop(event,this)");
+		y.setAttribute("ondragstart","dragStart(event)");
+		document.getElementById('subtodovalue').value = " ";
+		console.log("value of li "+sub_li_id)
+	}	
+	function delete_sub(a){
+		var id_,element = document.getElementById(a.id)
+		element.remove();
+		id_ = a.id.substr(a.id.length-6)
+		var em1 = document.getElementById(id_)
+		if (em1.children[1].children[0].children.length > 0) {
+			for(var i=0; i<em1.children[1].children[0].children.length; i++){
+				em1.children[1].children[0].children[i].children[0].innerHTML = id_.substr(id_.length - 1)+"."+(i + 1)
+			}
+		}
+		console.log(a.id,id_)
 	}
 </script>
 
@@ -231,17 +319,10 @@
             $(function () {
   $('[data-toggle="popover"]').popover()
 })
-        </script>
+            $(function () {
+  $('[data-toggle="tooltip"]').tooltip()
+})        </script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-fQybjgWLrvvRgtW6bFlB7jaZrFsaBXjsOMm/tB9LTS58ONXgqbR9W8oWht/amnpF" crossorigin="anonymous"></script>
    
 </body>
 </html>
-<!-- 
-<script>
-function myFunction() {
-var len = document.getElementsByClassName("example").length;
-  const list = document.getElementsByClassName("example")[0];
-  list.innerHTML = len;
-}
-</script>
- -->
