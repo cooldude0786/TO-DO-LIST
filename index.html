@@ -26,8 +26,7 @@
 		.developer_info{
 			justify-content: center;
 		}
-		.footer1{   
-   		background: darkkhaki;}
+
 		.icon_size{
 			font-size: 30px;
 		}
@@ -42,8 +41,8 @@
 	height: 30px;
 }
 /*.main-body{height: calc(100vh - 149px);}*/
-@media screen and (min-width: 576px)	{
-	.modal-dialog{max-width: 95%;}
+@media screen and (max-width: 576px)	{
+	.modal-dialog.DAILOG_BOX{max-width: 95%;}
 	.DAILOG_BOX_BUTTON{
 		width: 18%;
 		font-size: 35px;
@@ -55,25 +54,40 @@
 		font-size: 48px;
 	}
 }
-@media screen and (min-device-width: 320px) and (max-device-width: 768px){
-	.btn{
+@media only screen and (max-width: 480px){
+		.modal-dialog{
+			max-width: 84%;
+		}
+
+
+
+
+	/*.btn{
 		font-size: 30px;
 	}
 	.text-font {
     font-size: 35px;
-	}
+	}*/
 }
-.footer1{
+/*.footer1{
 	position: fixed;
 	bottom: 0px;
- 	background: darkkhaki;
-   	}
+   	}*/
 .icon_size{
 	font-size: 30px;
 }
 .social a{
 	text-decoration: none;
 	color:black;
+}
+.dot {
+    margin-left: 5px;
+    width: 62px;
+}
+.icons{
+	width: 55px;
+    font-size: 20px;
+    margin-left: 3px;
 }
 </style>
 </head>
@@ -169,28 +183,41 @@
 		</div>
 		<!-- <div class="row px-3 mx-0 col-md-12 bg-dark rounded-lg demo"></div> -->
 	</div>
+
+</div>
+<footer class="col-12 footer1 px-0" id="footer1">
 	<div class="align-items-center d-flex developer_info flex-column p-md-4">
 		<div class="border-bottom h-2 py-2 text-center w-100">Developer</div>
 		<div class="py-2"><img src="developer.jpg" style="height: 19rem;"></div>
 		<div style="font-family: 'Dancing Script', cursive;font-size: 20px;">Khizar Shaikh</div>
 	</div>
-</div>
 
-<footer class="footer1 col-12 footer1 p-2">
+<div style="background: darkkhaki;" class="pt-5">
 	<div class="d-flex justify-content-center pb-3">
 		<div class="px-2 icon_size social"><a href=""><i class="fa-brands fa-instagram" data-toggle="tooltip" data-placement="left" data-html="true" title="<img src='insta.jpg'height=150px;width=100px; />"></i></a></div>	
 		<div class="px-2 icon_size social"><a href="https://www.linkedin.com/in/khizar-shaikh-3a541022a"><i class="fa-brands fa-linkedin" data-toggle="tooltip" data-placement="top" data-html="true" title="https://www.linkedin.com/in/khizar-shaikh-3a541022a"></i></a></div>
 		<div class="px-2 icon_size social"><a href="https://github.com/cooldude0786" data-toggle="tooltip" data-placement="right" data-html="true" title="https://github.com/cooldude0786"><i class="fa-brands fa-github"></i></a></div>
 	</div>
-	<div class="d-flex justify-content-center pt-5">
+	<div class="d-flex justify-content-center pt-5 pb-2">
 	<div>Copyrigth &copy; 2022 Khizar Shiakh. All rigths reserved.</div>
 	</div>
+</div>
 </footer>
 
 
 
 <script type="text/javascript">
 	function $(id){return document.getElementById(id)}
+        let details = navigator.userAgent;
+        let regexp = /android|iphone|kindle|ipad/i;
+        let isMobileDevice = regexp.test(details);
+        if (isMobileDevice) {
+        	console.log('mobil')
+            document.getElementById('footer1').style.position = "fixed"
+            }
+            //  else {
+        //    	document.getElementById('footer1').style.position = "unset"
+        // }
 	var todo = [],len=1,classname,classindex;
 	function chang_parameter(){classname=arguments[0],classindex=arguments[1]-1;	}
 	const mainelement = $('demo');
@@ -213,7 +240,7 @@
 		tag.setAttribute("id",id_);
 		var txt = '';
 		// txt +='<div class="col-md-1 p-2 bg-light rounded-lg text-center" id="'+sr_id+'">'+todo.length+'</div><div class="col-md-10 p-2 bg-light ml-2 rounded-left ">'+todo[todo.length-1]+'</div><div class="bg-light col-md-1 rounded-right" onclick="delete_todo('+len+')" style="cursor: pointer;"><i class="fa-solid fa-circle-minus p-2"></i></div>';
-		txt +='<div class="col-md-1 p-2 bg-light rounded-lg text-center" id="'+sr_id+'">'+todo.length+'</div><div class="col-md-9 p-2 bg-light ml-2 rounded-left ">'+todo[todo.length-1]+'</div><div class="align-items-center bg-light col-md-1 d-flex justify-content-md-around p-0 rounded "><i class="fa-circle-plus  fa-solid" data-toggle="modal" data-target="#myModal" style="cursor: pointer;" onclick="chang_parameter('+id_+','+len+')">	</i><i class="fa-circle-minus fa-solid" style="cursor: pointer;" onclick="delete_todo('+len+')"></i></div>'; 
+		txt +='<div class="col-md-1 p-2 bg-light rounded-lg text-center" id="'+sr_id+'">'+todo.length+'</div><div class="col-md-10 p-2 bg-light ml-2 rounded">'+todo[todo.length-1]+'</div><div class=" icons align-items-center bg-light d-flex dotalign-items-center justify-content-md-around p-0 rounded"><i class="fa-circle-plus  fa-solid" data-toggle="modal" data-target="#myModal" style="cursor: pointer;" onclick="chang_parameter('+id_+','+len+')">	</i><i class="fa-circle-minus fa-solid" style="cursor: pointer;" onclick="delete_todo('+len+')"></i></div>'; 
 		tag.innerHTML = txt;
 		tag.setAttribute("draggable", "true");
 		tag.setAttribute("ondragover","allowDrop(event)");
@@ -333,6 +360,7 @@
 		}
 		console.log(a.id,id_)
 	}
+
 </script>
 
 <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
